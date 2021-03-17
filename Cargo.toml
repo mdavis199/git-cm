@@ -16,6 +16,7 @@ anyhow = "*"
 cargo_toml = "*"
 clap = { git = "https://github.com/clap-rs/clap/" } 
 console = "*"
+ctrlc = "*"
 dialoguer = "*"
 edit = "*"
 git2 = "*"

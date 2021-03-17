@@ -7,9 +7,11 @@ use crate::{
     },
     questions::{ask, SurveyResults},
 };
+use ctrlc;
 use clap::Clap;
 use itertools::Itertools;
 use std::{collections::HashMap, path::Path};
+
 
 mod args;
 mod cargo;
@@ -81,6 +83,8 @@ fn main() {
     if !app.repo_path.exists() || get_repository(app.repo_path.as_path()).is_err() {
         eprintln!("Invalid path to repository: {}", app.repo_path.display());
     } else {
+        #[cfg(windows)]
+        let _ = ctrlc::set_handler(move || { std::process::exit(0); } );
         run(app);
     }
 }

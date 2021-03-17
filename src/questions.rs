@@ -1,5 +1,6 @@
-use dialoguer::{theme::ColorfulTheme, Confirm, Input, Select};
+use dialoguer::{theme::ColorfulTheme, Confirm, Input, Select, console::Term};
 use std::collections::HashMap;
+use ctrlc;
 
 /// The result of the questioning process.
 #[derive(Debug, Default)]
@@ -31,6 +32,17 @@ impl SurveyResults {
 /// A `SurveyResult`.
 pub fn ask(types: HashMap<&str, &str>) -> SurveyResults {
     let mut results = SurveyResults::new();
+
+    // If ctrl-c is entered while the dialoger has the console
+    // the console may lose its cursor.  This injects a signal
+    // handler to show the cursor before exiting.
+    //
+    // No way to handle any error here; safe to ignore.
+    let _ = ctrlc::set_handler(move || {
+        let term = Term::stderr();
+        let _ = term.show_cursor();
+        std::process::exit(0);
+    });
 
     // Select the scope of the commit.
     let type_options = types
