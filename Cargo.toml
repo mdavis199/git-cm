@@ -12,16 +12,16 @@ authors = ["Sven Lechner <SirWindfield@users.noreply.github.com>"]
 edition = "2018"
 
 [dependencies]
-anyhow = "1.0.31"
-cargo_toml = "0.8.0"
-clap = "3.0.0-beta.1"
-console = "0.11.3"
-dialoguer = "0.6.2"
-edit = "0.1.2"
-git2 = "0.13.6"
-itertools = "0.9.0"
-once_cell = "1.4.0"
-serde = { version = "1.0.114", features = ["derive"] }
+anyhow = "*"
+cargo_toml = "*"
+clap = { git = "https://github.com/clap-rs/clap/" } 
+console = "*"
+dialoguer = "*"
+edit = "*"
+git2 = "*"
+itertools = "*"
+once_cell = "*"
+serde = { version = "*", features = ["derive"] }
 
 [package.metadata.commits]
 defaults = true
